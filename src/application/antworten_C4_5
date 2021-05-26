@@ -1,0 +1,27 @@
+5) Analysieren Sie den Code der Klasse RawDataFactory und beantworten Sie die Fragen: 
+
+a. Was ist der Zweck dieser Klasse? Warum ist sie notwendig?
+
+Diese klasse ist vearntwortlich dafür dass sie (customer, article, order, orderItem) objekte erzeugen,
+und es ist notwendig dass die objekte nicht überschrieben werden also Wenn der Konstruktor
+protected ist, kann man nur innerhalb des Pakets den Konstruktor aufrufen(datamodel)
+
+*******************************************************************************************************
+
+b. Erklären Sie die Wirkungsweise der Methode getInstance() ? 
+
+
+Zuerst wird die Variable null sein wenn getInstance aufgerufen ist, dann wird ein Objekt von RawDataFactory erstellt innerhalb der if statement, 
+um die Variable mit einem Wert zuweisen. beim folgenden getInstance Aufrufe wird das if statement nicht wieder durchgelaufen.
+daher kann man nur ein Objekt der Klasse RawDataFactory erstellen.es Kann sogar nicht außerhalb der Klasse aufgerufen werden 
+da der Konstruktor private ist.
+
+*******************************************************************************************************
+
+c. Wie wird erreicht, dass die Klasse system.DataFactory die einzige Klasse ist, welche die Funktion 
+der Klasse RawDataFactory benutzen kann? 
+
+Datenmodel klassen haben protected Konstruktoren, die eine direkte Instanziierung mit new außerhalb des Datenmodell-Pakets verhindern.
+Dafür existiert nur eine interne Implementierungsinstanz, die nur beim ersten Aufruf an system.DataFactory übergeben wird, 
+die nicht mehrmals gemacht sein kann.
+
