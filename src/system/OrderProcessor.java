@@ -23,15 +23,20 @@ final class OrderProcessor implements Components.OrderProcessor {
 		return 0;
 	}
 
-	@Override
+	@Override //do  // rateIndex: 1 as default (19% MwSt)
 	public long vat(long grossValue) {
 		// TODO Auto-generated method stub
 		return 0;
 	}
 
-	@Override
+	@Override //do
 	public long vat(long grossValue, int rateIndex) {
-		// TODO Auto-generated method stub
+		int percantage;
+		if (rateIndex == 1) {
+			percantage = 19;
+		} else if(rateIndex == 2) {
+			percantage = 7;
+		}
 		return 0;
 	}
 

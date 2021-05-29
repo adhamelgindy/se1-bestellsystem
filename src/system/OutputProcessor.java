@@ -30,7 +30,7 @@ public class OutputProcessor implements Components.OutputProcessor {
 		StringBuffer sbAllOrders = new StringBuffer( "-------------" );
 		StringBuffer sbLineItem = new StringBuffer();
 
-		
+		printVAT = true;
 		for (Order ord : orders) {
 			Customer customer = ord.getCustomer();
 
