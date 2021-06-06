@@ -25,19 +25,29 @@ final class OrderProcessor implements Components.OrderProcessor {
 
 	@Override //do  // rateIndex: 1 as default (19% MwSt)
 	public long vat(long grossValue) {
-		// TODO Auto-generated method stub
-		return 0;
+		
+		return vat (grossValue, 1);
 	}
 
 	@Override //do
 	public long vat(long grossValue, int rateIndex) {
-		int percantage;
+		//Brutto-Preis / 1.19 * 0,19 = enthaltene MwSt.
+		long ergebnis = 0;
 		if (rateIndex == 1) {
-			percantage = 19;
+			//runden nicht casten
+			
+			ergebnis = Math.round(grossValue * 0.19 / 1.19);
+			//ergebnis = (double)(grossValue * 0.19 / 1.19);
+	       
+			
 		} else if(rateIndex == 2) {
-			percantage = 7;
+			
+			ergebnis = Math.round(grossValue * 0.07 / 1.07);
 		}
-		return 0;
+		return ergebnis;
 	}
 
 }
+
+
+//17,328 => 17,33 runden 

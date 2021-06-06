@@ -27,10 +27,11 @@ public class OutputProcessor implements Components.OutputProcessor {
 
 	@Override
 	public void printOrders(List<Order> orders, boolean printVAT) {
+		
 		StringBuffer sbAllOrders = new StringBuffer( "-------------" );
 		StringBuffer sbLineItem = new StringBuffer();
-
-		printVAT = true;
+		long vat = 0;
+		long priceTotal = 0;
 		for (Order ord : orders) {
 			Customer customer = ord.getCustomer();
 
@@ -42,26 +43,43 @@ public class OutputProcessor implements Components.OutputProcessor {
 			long priceOrder = 0;			
 			
 			for (OrderItem oI : ord.getItems()) {
-				priceOrder += oI.getArticle().getUnitPrice() * oI.getUnitsOrdered();
+				long price = oI.getArticle().getUnitPrice() * oI.getUnitsOrdered();
+				priceOrder += price;
 				customerOrders += " " + oI.getUnitsOrdered() + "x " + oI.getDescription();
+				
+				vat += orderProcessor.vat( price, 1 );
 			}
-			long priceTotal = 0;
+		//	long priceTotal = 0;
 			priceTotal += priceOrder;		//Total Value
 			String Orderfmt = fmtPrice(priceOrder, " EUR", 14);
 
 			sbLineItem = fmtLine(customerOrders, Orderfmt, printLineWidth);
 			sbAllOrders.append("\n");
 			sbAllOrders.append(sbLineItem);
+			
+			//System.out.println(vat2);
 		}
-
-		String fmtPriceTotal = pad(fmtPrice(26756, "", " EUR"), 14, true);
+		
+		//long vat = orderProcessor.vat( sbAllOrders, 1 );
+		//vat = 4269;
+		//vat = orderProcessor.vat( 26756, 1 );
+		
+		String fmtPriceTotal = pad(fmtPrice(priceTotal, "", " EUR"), 14, true);
+		
+		String fmtPriceTotalTax = pad(fmtPrice(vat, "", " EUR"), 14, true);
 		sbAllOrders.append("\n")
 			.append(fmtLine("----------", " ----------",printLineWidth))
 			.append("\n")
 			.append(fmtLine("Gesamtwert aller Bestellungen:",
-					fmtPriceTotal,printLineWidth));
+					fmtPriceTotal,printLineWidth))
+			.append("\n");
+			if (printVAT == true) {
+			sbAllOrders.append(fmtLine("Im Gesamtbetrag enthaltene Mehrwertsteuer (19%):", fmtPriceTotalTax ,printLineWidth));
+			}
 		System.out.println( sbAllOrders.toString() );
 		
+		
+		//long vat = orderProcessor.vat( sbAllOrders, 1 );
 	}
 
 	@Override
