@@ -7,9 +7,17 @@ public class OrderItem {
 	int unitsOrdered;
 	
 	protected OrderItem (String descr, Article article, int units) {
-		description = descr;
+		if(descr == null) {
+			this.description = "";
+		}else {
+			this.description = descr;
+		}
+		if(units < 0) {
+			this.unitsOrdered = 0;
+		}else {
+			this.unitsOrdered = units;
+		}
 		this.article = article;
-		unitsOrdered = units;
 	}
 	
 	public String getDescription() {
@@ -17,7 +25,13 @@ public class OrderItem {
 	}
 	
 	public void setDescription(String descr) {
-		description = descr;
+		if(descr == null) {
+			description = "";
+		}else {
+			description = descr;
+
+		}
+
 	}
 	
 	public Article getArticle() {
@@ -29,6 +43,11 @@ public class OrderItem {
 	}
 	
 	public void setUnitsOrdered(int number) {
-		unitsOrdered = number;
+		if(number < 0) {
+			unitsOrdered = 0;
+		}else {
+			unitsOrdered = number;
+		}
 	}
+
 }
