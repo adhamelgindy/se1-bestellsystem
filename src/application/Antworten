@@ -1,0 +1,40 @@
+5) Analysieren Sie den Code der Klasse RawDataFactory und beantworten Sie die Fragen: 
+
+a. Was ist der Zweck dieser Klasse? Warum ist sie notwendig?
+
+Diese klasse ist vearntwortlich dafür dass sie (customer, article, order, orderItem) objekte erzeugen,
+und es ist notwendig dass die objekte nicht überschrieben werden also Wenn der Konstruktor
+protected ist, kann man nur innerhalb des Pakets den Konstruktor aufrufen(datamodel)
+
+*******************************************************************************************************
+
+b. Erklären Sie die Wirkungsweise der Methode getInstance() ? 
+
+
+Zuerst wird die Variable null sein wenn getInstance aufgerufen ist, dann wird ein Objekt von RawDataFactory erstellt innerhalb der if statement, 
+um die Variable mit einem Wert zuweisen. beim folgenden getInstance Aufrufe wird das if statement nicht wieder durchgelaufen.
+daher kann man nur ein Objekt der Klasse RawDataFactory erstellen.es Kann sogar nicht außerhalb der Klasse aufgerufen werden 
+da der Konstruktor private ist.
+
+*******************************************************************************************************
+
+c. Wie wird erreicht, dass die Klasse system.DataFactory die einzige Klasse ist, welche die Funktion 
+der Klasse RawDataFactory benutzen kann? 
+
+Datenmodel klassen haben protected Konstruktoren, die eine direkte Instanziierung mit new außerhalb des Datenmodell-Pakets verhindern.
+Dafür existiert nur eine interne Implementierungsinstanz, die nur beim ersten Aufruf an system.DataFactory übergeben wird, 
+die nicht mehrmals gemacht sein kann.
+
+
+
+********************************
+********************************
+
+An asterisk "*" matches anything except a slash. The character "?" matches any one character except "/". 
+The range notation, e.g. [a-zA-Z], can be used to match one of the characters in a range. See fnmatch(3) and the FNM_PATHNAME flag for a more detailed description.
+
+A leading "**" followed by a slash means match in all directories. For example, "**/foo" matches file or directory "foo" anywhere, the same as pattern "foo". "**/foo/bar" matches file or directory "bar" anywhere that is directly under directory "foo".
+
+A trailing "/**" matches everything inside. For example, "abc/**" matches all files inside directory "abc", relative to the location of the .gitignore file, with infinite depth.
+
+• git add *.txt ; Stagen aller .txt Files im aktuellen Verzeichnis (bash löst * auf)

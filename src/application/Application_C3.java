@@ -91,7 +91,7 @@ public class Application_C3 {
 	     * Erzeugung der Kunden, Artikel und Bestellungen aus Application_1.java
 	     */
 		List<Order> orders = new ArrayList<Order>(List.of( o5234, o8592, o3563, o6135, o1337, o5432));		
-	    outputProcessor.printOrders( orders, false); // Ausgabe aller Bestellungen
+	    outputProcessor.printOrders( orders, true); // Ausgabe aller Bestellungen
 	    //long vat = orderProcessor.vat( orders, 1 );
 	}
 
